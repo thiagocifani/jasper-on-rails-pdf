@@ -31,7 +31,9 @@ module JasperOnRailsPdf
     JASPER_PRINT                    = Rjb::import 'net.sf.jasperreports.engine.JasperPrint'
     JRXML_UTILS                     = Rjb::import 'net.sf.jasperreports.engine.util.JRXmlUtils'
     JR_EMPTY_DATA_SOURCE            = Rjb::import 'net.sf.jasperreports.engine.JREmptyDataSource'
-    JR_XPATH_QUERY_EXECUTER_FACTORY = Rjb::import 'net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory'
+    JR_XPATH_QUERY_EXECUTER_FACTORY = silence_warnings do
+      Rjb::import 'net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory'
+    end
     INPUT_SOURCE                    = Rjb::import 'org.xml.sax.InputSource'
     STRING_READER                   = Rjb::import 'java.io.StringReader'
     HASHMAP                         = Rjb::import 'java.util.HashMap'

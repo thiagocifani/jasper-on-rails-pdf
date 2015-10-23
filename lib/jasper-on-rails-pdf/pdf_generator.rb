@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-module JasperOnRailsPDF
+module JasperOnRailsPdf
   class PdfGenerator
     attr_reader :jrxml_file, :jasper_file
     attr_reader :resource
@@ -21,21 +21,22 @@ module JasperOnRailsPDF
     def params
       jasper_params = HASHMAP.new
 
-      JasperRails.config[:report_params].each do |k, v|
+      JasperOnRailsPdf.config[:report_params].each do |k, v|
         jasper_params.put(k, v)
       end
     end
 
     def input_source
-      options = JasperRails.config[:xml_options]
-      input_source = INPUT_SOURCE.new
-      input_source.setCharacterStream(STRING_READER
+      options = JasperOnRailsPdf.config[:xml_options]
+      INPUT_SOURCE.new.setCharacterStream(STRING_READER
                                       .new(resource.to_xml(options).to_s))
     end
 
     def data_document
-      data_document = JRXML_UTILS._invoke('parse', 'Lorg.xml.sax.InputSource;',
-                                          input_source)
+      data_document = silence_warnings do
+        JRXML_UTILS._invoke('parse', 'Lorg.xml.sax.InputSource;', input_source)
+      end
+
       jasper_params
         .put(JR_XPATH_QUERY_EXECUTER_FACTORY.PARAMETER_XML_DATA_DOCUMENT,
              data_document)

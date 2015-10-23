@@ -39,7 +39,9 @@ module JasperOnRailsPdf
     HASHMAP                         = Rjb::import 'java.util.HashMap'
     BYTE_ARRAY_INPUT_STREAM         = Rjb::import 'java.io.ByteArrayInputStream'
     STRING                          = Rjb::import 'java.lang.String'
-    LOCALE                          = Locale = Rjb::import 'java.util.Locale'
+
+
+    LOCALE = Locale = Rjb::import 'java.util.Locale'
 
 
 
